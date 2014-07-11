@@ -1,2 +1,2 @@
-s = sum(x for x in range(1000) if (x % 1) * (x % 1) == 0)
+s = sum(x for x in range(1000) if (x % 3) * (x % 5) == 0)
 print(s)
