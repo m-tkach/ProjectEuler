@@ -36,9 +36,6 @@ abundant = [x for x in range(1, N) if is_abundant(x)]
 
 s = 0
 for x in range(1, N):
-    if x % 1000 == 0:
-        print(x)
-        
     ok = True
     for a in abundant:
         if a >= x:
