@@ -6,7 +6,7 @@ answer = -1
 for d in range(1, D):
     z = 1
     rem = []
-        
+
     m = z % d
     while not m in rem:
         rem.append(m)
