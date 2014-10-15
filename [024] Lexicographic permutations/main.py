@@ -34,7 +34,7 @@ def perm(space, n):
         size -= 1
 
     return p
-    
+
 
 a = [x for x in range(L)]
 p = perm(a, N)
