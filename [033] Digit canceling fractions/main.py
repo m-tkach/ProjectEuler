@@ -25,7 +25,7 @@ def calc():
             if a == b:
                 continue
             
-            for c in range(1, 10):
+            for c in range(a + 1, 10):
                 if b == c:
                     continue
                 
