@@ -40,7 +40,7 @@ def is_straight_flush(hand):
 
 def is_royal_flush(hand):
     top_val = value(hand[0])
-    return top_val == 14 and is_straight(hand) and is_flush(hand)
+    return top_val == 14 and is_straight_flush(hand)
 
 
 def is_pair(hand):
