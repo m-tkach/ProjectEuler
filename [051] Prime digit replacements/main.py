@@ -1,4 +1,4 @@
-PRIME_COUNT = 7
+PRIME_COUNT = 8
 DELTA = 10000
 
 
@@ -27,11 +27,25 @@ def is_prime(x):
     return primes[l] == x
 
 
-def update_number(x, pos, digit):
-    # positions: ...43210
-    ten = 10**pos
-    v = x + digit * ten - (x % (ten * 10) - x % ten)
-    return v
+def to_list(i):
+    if i == 0:
+        return [0]
+    ret = []
+    while i > 0:
+        ret.append(i % 10)
+        i //= 10
+    return ret[::-1]
+
+
+def to_int(l):
+    ans= 0
+    for x in l:
+        ans = ans * 10 + x
+    return ans
+
+
+def bit(val, index):
+    return (val >> index) & 1
 
 
 def calc():
@@ -41,22 +55,37 @@ def calc():
         
         while i < len(primes):
             p = primes[i]
-            size = len(str(p))
-            for pos in range(size):
-                prime_list = []
-                start = 0 if pos + 1 < size else 1
-                for d in range(start, 10):
-                    v = update_number(p, pos, d)
-                    if is_prime(v):
-                        prime_list.append(v)
-                if len(prime_list) == PRIME_COUNT:
-                    return prime_list
-                if p == 56003:
-                    print(prime_list)
+            p_list = to_list(p)
+            L = len(p_list)
+            MAX = 1 << L
+            
+            for mask in range(1, MAX):
+                p_list = to_list(p)
+                indexes = []
+                for j in range(L):
+                    if bit(mask, j):
+                        indexes.append(j)
+
+                for j in indexes:
+                    if p_list[j] != p_list[indexes[0]]:
+                        break
+                else:
+                    group = []
+                    for d in range(10):
+                        for j in indexes:
+                            p_list[j] = d
+                        if p_list[0] != 0:
+                            new_p = to_int(p_list)
+                            if is_prime(new_p):
+                                group.append(new_p)
+                    if len(group) == PRIME_COUNT:
+                        group.sort()
+                        return group
             i += 1
-        
+            
         end += DELTA
-    pass
+        
+    return None
 
 
 print(calc())
