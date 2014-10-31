@@ -27,6 +27,6 @@ def calc():
             if temp > ans:
                 ans = temp
     return ans
-        
+ 
 
 print(calc())
